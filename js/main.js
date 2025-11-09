@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "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";
 
 let trialsLeft = parseInt(localStorage.getItem("trialsLeft")) || 5;
 let dailyStreak = parseInt(localStorage.getItem("dailyStreak")) || 3;
@@ -762,5 +762,6 @@ function getPayPalPlanId(plan) {
   };
   return plans[plan.toLowerCase()] || plans.basic;
 }
+
 
 
