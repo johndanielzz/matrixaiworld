@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatrixAI Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        /* --- General --- */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: radial-gradient(circle at center, #000 60%, #0a0a0a);
+            color: #f0f0f0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.light {
+            background: radial-gradient(circle at center, #fff 60%, #ddd);
+            color: #111;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #111;
+            border-right: 2px solid #00ff99;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 0 20px #00ff99;
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        body.light .sidebar {
+            background: #f0f0f0;
+            border-color: #00cc99;
+            box-shadow: 0 0 20px #00cc99;
+        }
+
+        .sidebar h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        body.light .sidebar h1 {
+            color: #00cc99;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ccc;
+            margin: 12px 0;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #00ff99;
+            text-shadow: 0 0 8px #00ff99;
+        }
+
+        /* --- Main Content --- */
+        .main {
+            margin-left: 270px;
+            padding: 30px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            margin-bottom: 15px;
+        }
+
+        body.light h2 {
+            color: #00cc99;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #00ff99;
+        }
+
+        body.light th,
+        body.light td {
+            border-color: #00cc99;
+        }
+
+        th {
+            color: #00ff99;
+        }
+
+        tr:hover {
+            background: rgba(0, 255, 153, 0.1);
+        }
+
+        input,
+        select,
+        button {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            margin-right: 8px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #00ff99, #ff00ff);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        body.light button {
+            color: #fff;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ff99, 0 0 25px #ff00ff;
+        }
+
+        .top-actions {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #00ff99;
+            padding-bottom: 5px;
+        }
+
+        body.light li {
+            border-color: #00cc99;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h1>MatrixAI Admin</h1>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+        <a href="#" id="themeToggle">Toggle Theme</a>
+    </div>
+
+    <div class="main">
+
+        <!-- Users Section -->
+        <div class="section" id="usersSection">
+            <h2>Registered Users</h2>
+            <div class="top-actions">
+                <input type="text" id="searchUser" placeholder="Search by email or username">
+                <button id="exportUsersBtn">Export Users</button>
+                <button id="importUsersBtn">Import Users</button>
+            </div>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Trials</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="section" id="chatSection">
+            <h2>Saved Chat Sessions</h2>
+            <div class="top-actions">
+                <button id="exportChatsBtn">Export Chats</button>
+                <button id="clearChatsBtn">Clear All Chats</button>
+            </div>
+            <ul id="savedChats"></ul>
+        </div>
+
+        <!-- Announcements -->
+        <div class="section" id="announcementSection">
+            <h2>Site Announcement</h2>
+            <div class="top-actions">
+                <input type="text" id="announcementInput" placeholder="Enter announcement...">
+                <input type="date" id="announcementExpire">
+                <button id="saveAnnouncementBtn">Save Announcement</button>
+            </div>
+            <p id="currentAnnouncement"></p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Theme Toggle ---
+        const body = document.body;
+        document.getElementById("themeToggle").addEventListener("click", () => body.classList.toggle("light"));
+
+        // --- Logout ---
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.clear();
+            alert("Logged out successfully!");
+            window.location.href = "login.html";
+        });
+
+        // --- Users Management ---
+        function loadUsers(filter = "") {
+            const users = JSON.parse(localStorage.getItem("matrix_users") || "[]");
+            const tbody = document.querySelector("#usersTable tbody");
+            tbody.innerHTML = "";
+            users.filter(u => u.email.includes(filter) || u.username.includes(filter))
+                .forEach((user, index) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${user.email}</td>
+                        <td>${user.username}</td>
+                        <td>${user.trials}</td>
+                        <td>
+                            <button onclick="editUser(${index})">Edit</button>
+                            <button onclick="resetTrials(${index})">Reset Trials</button>
+                            <button onclick="deleteUser(${index})">Delete</button>
+                        </td>`;
+                    tbody.appendChild(tr);
+                });
+        }
+        function editUser(index) {
+            const users = JSON.parse(localStorage.getItem("matrix_users") || "[]");
+            const newTrials = prompt("Set new trial count for user:", users[index].trials);
+            if (newTrials !== null) {
+                users[index].trials = parseInt(newTrials);
+                localStorage.setItem("matrix_users", JSON.stringify(users));
+                loadUsers();
+            }
+        }
+        function resetTrials(index) {
+            const users = JSON.parse(localStorage.getItem("matrix_users") || "[]");
+            users[index].trials = 5;
+            localStorage.setItem("matrix_users", JSON.stringify(users));
+            loadUsers();
+        }
+        function deleteUser(index) {
+            const users = JSON.parse(localStorage.getItem("matrix_users") || "[]");
+            if (confirm(`Delete user: ${users[index].username}?`)) {
+                users.splice(index, 1);
+                localStorage.setItem("matrix_users", JSON.stringify(users));
+                loadUsers();
+            }
+        }
+        document.getElementById("searchUser").addEventListener("input", e => loadUsers(e.target.value.trim()));
+
+        // Export Users
+        document.getElementById("exportUsersBtn").addEventListener("click", () => {
+            const data = localStorage.getItem("matrix_users") || "[]";
+            const blob = new Blob([data], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a"); a.href = url; a.download = "matrix_users.json"; a.click(); URL.revokeObjectURL(url);
+        });
+
+        // Import Users
+        document.getElementById("importUsersBtn").addEventListener("click", () => {
+            const input = document.createElement("input"); input.type = "file"; input.accept = ".json";
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = e => {
+                    localStorage.setItem("matrix_users", e.target.result);
+                    loadUsers();
+                }
+                reader.readAsText(file);
+            }
+            input.click();
+        });
+
+        loadUsers();
+
+        // --- Chat Management ---
+        function loadSavedChats() {
+            const ul = document.getElementById("savedChats");
+            const chats = JSON.parse(localStorage.getItem("matrix_chats") || "[]");
+            ul.innerHTML = "";
+            chats.forEach((chat, i) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>You:</strong> ${chat.user}<br><strong>AI:</strong> ${chat.ai} <button onclick="deleteChat(${i})">Delete</button>`;
+                ul.appendChild(li);
+            });
+        }
+        function deleteChat(index) {
+            const chats = JSON.parse(localStorage.getItem("matrix_chats") || "[]");
+            chats.splice(index, 1);
+            localStorage.setItem("matrix_chats", JSON.stringify(chats));
+            loadSavedChats();
+        }
+        document.getElementById("clearChatsBtn").addEventListener("click", () => {
+            if (confirm("Clear all chat history?")) {
+                localStorage.removeItem("matrix_chats");
+                loadSavedChats();
+            }
+        });
+        document.getElementById("exportChatsBtn").addEventListener("click", () => {
+            const data = localStorage.getItem("matrix_chats") || "[]";
+            const blob = new Blob([data], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a"); a.href = url; a.download = "matrix_chats.json"; a.click(); URL.revokeObjectURL(url);
+        });
+
+        loadSavedChats();
+
+        // --- Announcements ---
+        const announcementInput = document.getElementById("announcementInput");
+        const announcementExpire = document.getElementById("announcementExpire");
+        const currentAnnouncement = document.getElementById("currentAnnouncement");
+
+        document.getElementById("saveAnnouncementBtn").addEventListener("click", () => {
+            const text = announcementInput.value.trim();
+            const expire = announcementExpire.value;
+            if (!text) return alert("Enter announcement!");
+            localStorage.setItem("matrix_announcement", JSON.stringify({ text, expire }));
+            loadAnnouncement();
+            alert("Announcement saved!");
+        });
+
+        function loadAnnouncement() {
+            const data = JSON.parse(localStorage.getItem("matrix_announcement") || "{}");
+            if (data.text) {
+                if (data.expire && new Date() > new Date(data.expire)) {
+                    localStorage.removeItem("matrix_announcement");
+                    currentAnnouncement.textContent = "No announcements yet.";
+                } else {
+                    currentAnnouncement.textContent = data.text + (data.expire ? ` (expires: ${data.expire})` : "");
+                }
+            } else {
+                currentAnnouncement.textContent = "No announcements yet.";
+            }
+        }
+        loadAnnouncement();
+    </script>
+</body>
+
+</html>
