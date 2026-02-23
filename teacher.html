@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Academy - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="teacher">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="hero-shell">
+        <span class="hero-kicker">Teacher Academy 2026</span>
+        <h1>The Biggest Teaching Engine: Any Subject, Any Topic, Voice-Led Learning</h1>
+        <p>Design full courses, generate lessons and quizzes, build study plans, assignments, flashcards, and teach with live AI voice when activated.</p>
+        <p id="teacherStatus" class="form-hint">Ready.</p>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <h2>Course Builder</h2>
+          <div class="form-grid">
+            <label>
+              Course Topic
+              <input id="teacherTopic" class="input" type="text" placeholder="Example: Algebra for High School Students">
+            </label>
+            <div class="form-grid cols-2">
+              <label>
+                Subject
+                <select id="teacherSubject" class="select">
+                  <option value="general">General Education</option>
+                  <option value="math">Mathematics</option>
+                  <option value="science">Science</option>
+                  <option value="technology">Technology</option>
+                  <option value="engineering">Engineering</option>
+                  <option value="history">History</option>
+                  <option value="language">Language</option>
+                  <option value="business">Business</option>
+                  <option value="health">Health</option>
+                  <option value="art">Art & Creativity</option>
+                </select>
+              </label>
+              <label>
+                Learner Level
+                <select id="teacherLevel" class="select">
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate" selected>Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-grid cols-2">
+              <label>
+                Duration
+                <input id="teacherDuration" class="input" type="text" placeholder="10 weeks">
+              </label>
+              <label>
+                Teaching Style
+                <select id="teacherStyle" class="select">
+                  <option value="interactive">Interactive</option>
+                  <option value="story-driven">Story-Driven</option>
+                  <option value="project-based">Project-Based</option>
+                  <option value="exam-focused">Exam-Focused</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Learning Goals
+              <textarea id="teacherGoals" class="textarea" placeholder="List what learners must master by end of course..."></textarea>
+            </label>
+            <div class="inline-row">
+              <button id="teacherGenerateCourseBtn" type="button" class="btn primary">Generate Full Course</button>
+              <button id="teacherGenerateStudyPlanBtn" type="button" class="btn ghost">Generate Study Plan</button>
+            </div>
+            <div class="inline-row">
+              <input id="teacherCourseTitle" class="input" style="max-width:320px;" type="text" placeholder="Course title override">
+              <button id="teacherSaveCourseBtn" type="button" class="btn secondary">Save Course</button>
+            </div>
+            <pre id="teacherOutlineOutput" class="tool-output">No course generated yet.</pre>
+            <pre id="teacherStudyPlanOutput" class="tool-output">No study plan yet.</pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Voice Teaching Engine</h2>
+          <div class="form-grid">
+            <label class="inline-row">
+              <input id="teacherVoiceAuto" type="checkbox" checked>
+              <span>Auto-speak newly generated lessons when voice is activated</span>
+            </label>
+            <div class="form-grid cols-3">
+              <label>
+                Voice
+                <select id="teacherVoiceSelect" class="select"></select>
+              </label>
+              <label>
+                Rate: <span id="teacherVoiceRateLabel">1.0</span>
+                <input id="teacherVoiceRate" type="range" min="0.6" max="1.4" step="0.1" value="1.0">
+              </label>
+              <label>
+                Pitch: <span id="teacherVoicePitchLabel">1.0</span>
+                <input id="teacherVoicePitch" type="range" min="0.7" max="1.5" step="0.1" value="1.0">
+              </label>
+            </div>
+            <label>
+              Read Source
+              <select id="teacherVoiceSource" class="select">
+                <option value="lesson">Current Lesson</option>
+                <option value="outline">Course Outline</option>
+                <option value="quiz">Quiz</option>
+                <option value="studyplan">Study Plan</option>
+                <option value="assignment">Assignment</option>
+                <option value="qa">Tutor Answer</option>
+              </select>
+            </label>
+            <div class="inline-row">
+              <button id="teacherVoiceActivateBtn" type="button" class="btn primary">Activate Voice</button>
+              <button id="teacherVoiceReadBtn" type="button" class="btn ghost">Read Selected Content</button>
+              <button id="teacherVoiceStopBtn" type="button" class="btn danger">Stop Voice</button>
+            </div>
+            <div class="inline-row">
+              <button id="teacherStartLiveClassBtn" type="button" class="btn secondary">Start Live Class (Generate + Speak)</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <h2>Lesson Studio</h2>
+          <div class="form-grid">
+            <div class="form-grid cols-2">
+              <label>
+                Select Module
+                <select id="teacherModuleSelect" class="select">
+                  <option value="">No modules yet</option>
+                </select>
+              </label>
+              <label>
+                Lesson Focus
+                <input id="teacherLessonFocus" class="input" type="text" placeholder="Focus on real-world examples">
+              </label>
+            </div>
+            <div class="inline-row">
+              <button id="teacherGenerateLessonBtn" type="button" class="btn primary">Generate Lesson</button>
+              <button id="teacherGenerateQuizBtn" type="button" class="btn ghost">Generate Quiz</button>
+              <button id="teacherGenerateFlashcardsBtn" type="button" class="btn ghost">Generate Flashcards</button>
+              <button id="teacherGenerateAssignmentBtn" type="button" class="btn ghost">Generate Assignment</button>
+            </div>
+            <pre id="teacherLessonOutput" class="tool-output">No lesson yet.</pre>
+            <pre id="teacherQuizOutput" class="tool-output">No quiz yet.</pre>
+            <pre id="teacherFlashcardsOutput" class="tool-output">No flashcards yet.</pre>
+            <pre id="teacherAssignmentOutput" class="tool-output">No assignment yet.</pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Module Progress</h2>
+          <p id="teacherProgressSummary" class="form-hint">0% complete</p>
+          <ul id="teacherProgressList" style="list-style:none;padding:0;margin:0;"></ul>
+          <h3 style="margin-top:1rem;">Tutor Q&A</h3>
+          <div class="form-grid">
+            <label>
+              Ask the Teacher
+              <textarea id="teacherTutorQuestion" class="textarea" placeholder="Explain why this method works and when to use it."></textarea>
+            </label>
+            <button id="teacherAskTutorBtn" type="button" class="btn primary">Ask Tutor</button>
+            <pre id="teacherTutorAnswerOutput" class="tool-output">Tutor answer appears here.</pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <div class="page-title">
+            <h2>Saved Courses</h2>
+            <div class="inline-row">
+              <button id="teacherExportCoursesBtn" type="button" class="btn ghost">Export</button>
+              <button id="teacherImportCoursesBtn" type="button" class="btn ghost">Import</button>
+              <input id="teacherImportCoursesInput" type="file" accept="application/json" class="hidden">
+            </div>
+          </div>
+          <ul id="teacherCourseList" style="list-style:none;padding:0;margin:0;"></ul>
+        </article>
+
+        <article class="card">
+          <div class="page-title">
+            <h2>Teaching History</h2>
+            <button id="teacherExportHistoryBtn" type="button" class="btn ghost">Export</button>
+          </div>
+          <ul id="teacherHistoryList" style="list-style:none;padding:0;margin:0;"></ul>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Teacher Notes</h2>
+          <button id="teacherSaveNotesBtn" type="button" class="btn secondary">Save Notes</button>
+        </div>
+        <textarea id="teacherNotes" class="textarea" placeholder="Store lesson reminders, adaptation notes, and personalized strategies..."></textarea>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
+</html>

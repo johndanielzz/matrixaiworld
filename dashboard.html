@@ -1,412 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatrixAI 4.0 — The Future AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ===== BODY ===== */
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background: radial-gradient(circle at center, #000 60%, #0a0a0a);
-            color: #f0f0f0;
-            overflow-x: hidden;
-        }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100vh;
-            background: #111;
-            border-right: 3px solid #00ff99;
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            box-shadow: 0 0 50px #00ff99;
-            z-index: 100;
-        }
-
-        .sidebar h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ff99;
-            text-align: center;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 35px;
-            text-shadow: 0 0 20px #00ff99;
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: #ccc;
-            margin: 14px 0;
-            padding: 16px;
-            font-weight: bold;
-            border-radius: 14px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .sidebar a:hover {
-            color: #000;
-            background: linear-gradient(90deg, #00ff99, #ff00ff);
-            box-shadow: 0 0 30px #00ff99;
-        }
-
-        /* ===== MAIN ===== */
-        .main {
-            margin-left: 320px;
-            padding: 50px;
-            transition: 0.4s;
-        }
-
-        /* ===== TABS ===== */
-        .tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            background: #1a1a1a;
-            padding: 14px 30px;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .tab.active {
-            background: linear-gradient(90deg, #00ff99, #ff00ff);
-            color: #000;
-            box-shadow: 0 0 35px #00ff99;
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        /* ===== CHAT ===== */
-        #chatBox {
-            height: 500px;
-            overflow-y: auto;
-            background: #0c0c0c;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: inset 0 0 30px #00ff99;
-            margin-bottom: 20px;
-            scroll-behavior: smooth;
-        }
-
-        .user-msg,
-        .ai-msg {
-            max-width: 80%;
-            padding: 16px 22px;
-            border-radius: 25px;
-            margin: 12px 0;
-            animation: fadeIn 0.3s ease;
-            word-wrap: break-word;
-            font-size: 1rem;
-        }
-
-        .user-msg {
-            align-self: flex-end;
-            background: linear-gradient(90deg, #00ff99, #009966);
-            color: #000;
-            box-shadow: 0 0 20px #00ff99;
-        }
-
-        .ai-msg {
-            align-self: flex-start;
-            background: linear-gradient(90deg, #ff00ff, #9900ff);
-            color: #000;
-            box-shadow: 0 0 20px #ff00ff;
-        }
-
-        .chat-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 16px;
-            border-radius: 25px 0 0 25px;
-            background: #222;
-            color: #fff;
-            border: none;
-        }
-
-        .chat-input button {
-            padding: 16px 24px;
-            border: none;
-            border-radius: 0 25px 25px 0;
-            background: linear-gradient(90deg, #00ff99, #ff00ff);
-            font-weight: bold;
-            color: #000;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .chat-input button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 35px #00ff99;
-        }
-
-        /* ===== IMAGE TAB ===== */
-        #imageResult img {
-            border-radius: 25px;
-            box-shadow: 0 0 40px #00ff99;
-            margin-top: 25px;
-            width: 100%;
-            max-width: 700px;
-            transition: transform 0.3s;
-        }
-
-        #imageResult img:hover {
-            transform: scale(1.05);
-        }
-
-        /* ===== TOOLS ===== */
-        .tool {
-            background: #141414;
-            border-radius: 25px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 0 20px #00ff99;
-            transition: 0.3s;
-        }
-
-        .tool:hover {
-            box-shadow: 0 0 40px #ff00ff;
-        }
-
-        textarea,
-        input[type="text"] {
-            width: 100%;
-            min-height: 130px;
-            background: #222;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 16px;
-            font-size: 1rem;
-        }
-
-        select {
-            padding: 14px;
-            border-radius: 15px;
-            background: #222;
-            color: #fff;
-            border: none;
-            margin-left: 10px;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .glow {
-            animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from {
-                box-shadow: 0 0 20px #00ff99;
-            }
-
-            to {
-                box-shadow: 0 0 40px #ff00ff;
-            }
-        }
-
-        /* ===== ANNOUNCEMENTS ===== */
-        #announcementBanner {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #00ff99, #ff00ff);
-            color: #000;
-            padding: 18px 35px;
-            border-radius: 25px;
-            box-shadow: 0 0 30px #00ff99;
-            display: none;
-            z-index: 999;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* ===== BADGES ===== */
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            margin-left: 10px;
-            border-radius: 15px;
-            background: linear-gradient(90deg, #00ff99, #ff00ff);
-            color: #000;
-            font-weight: bold;
-            font-size: 0.9rem;
-            animation: glowBadge 2s infinite alternate;
-        }
-
-        @keyframes glowBadge {
-            from {
-                box-shadow: 0 0 6px #00ff99;
-            }
-
-            to {
-                box-shadow: 0 0 20px #ff00ff;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
-
-<body>
-    <div class="sidebar">
-        <h1>MatrixAI <span class="badge">Future</span></h1>
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="payment.html">💎 Upgrade</a>
-        <a href="leaderboard.html">🏆 Leaderboard</a>
-        <a href="admin.html">🛠️ Admin</a>
-        <a href="#" id="logoutBtn">🚪 Logout</a>
+<body data-page="dashboard">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="admin.html" class="auth-only" data-nav="admin">Admin</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
     </div>
+  </header>
 
-    <div class="main">
-        <div id="announcementBanner"></div>
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <div id="announcementBanner" class="banner"></div>
+
+      <section class="card">
+        <div class="page-title">
+          <div>
+            <h1 id="dashboardGreeting">Welcome back</h1>
+            <p>Work across chat, image generation, AI tools, memory, and analytics.</p>
+          </div>
+          <div class="countdown">Free users consume one trial per chat message.</div>
+        </div>
 
         <div class="tabs">
-            <div class="tab active" data-target="chatTab">💬 Chat</div>
-            <div class="tab" data-target="imageTab">🖼️ Image Gen</div>
-            <div class="tab" data-target="toolsTab">🧰 AI Tools</div>
-            <div class="tab" data-target="memoryTab">🧠 Memory</div>
-            <div class="tab" data-target="analyticsTab">📊 Analytics</div>
+          <button type="button" class="tab-btn active" data-target="tab-chat">Chat</button>
+          <button type="button" class="tab-btn" data-target="tab-image">Image</button>
+          <button type="button" class="tab-btn" data-target="tab-tools">Tools</button>
+          <button type="button" class="tab-btn" data-target="tab-memory">Memory</button>
+          <button type="button" class="tab-btn" data-target="tab-analytics">Analytics</button>
         </div>
+      </section>
 
-        <!-- CHAT TAB -->
-        <div id="chatTab" class="section active">
-            <p><strong>Trials Left:</strong> <span id="trialCount">5</span> <span class="badge" id="dailyStreak">🔥
-                    3-Day Streak</span></p>
-            <div id="chatBox"></div>
-            <div class="chat-input">
-                <input type="text" id="userInput" placeholder="Ask MatrixAI anything...">
-                <button id="sendBtn">Send</button>
-                <button id="voiceBtn">🎤</button>
-            </div>
+      <section id="tab-chat" class="tab-panel active card">
+        <div id="chatStream" class="chat-stream"></div>
+        <div class="chat-actions">
+          <input id="chatInput" class="input" type="text" placeholder="Ask MatrixAI anything...">
+          <button id="chatSendBtn" type="button" class="btn primary">Send</button>
+          <button id="voiceBtn" type="button" class="btn ghost">Voice</button>
+          <button id="chatSpeakBtn" type="button" class="btn ghost">Speak Last AI</button>
+          <button id="chatClearBtn" type="button" class="btn ghost">Clear</button>
+          <button id="chatExportBtn" type="button" class="btn ghost">Export</button>
         </div>
+      </section>
 
-        <!-- IMAGE TAB -->
-        <div id="imageTab" class="section">
-            <h2>🖼️ Generate Futuristic AI Images</h2>
-            <input type="text" id="imagePrompt" placeholder="Describe your image idea...">
-            <select id="imageStyle">
-                <option value="realistic">Realistic</option>
-                <option value="cartoon">Cartoon</option>
-                <option value="cyberpunk">Cyberpunk</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="sci-fi">Sci-Fi</option>
+      <section id="tab-image" class="tab-panel card">
+        <h2>Image Generation</h2>
+        <form id="imageForm" class="form-grid cols-2">
+          <label>
+            Prompt
+            <input id="imagePrompt" class="input" type="text" placeholder="Describe the image you want" required>
+          </label>
+          <label>
+            Style
+            <select id="imageStyle" class="select">
+              <option value="photorealistic">Photorealistic</option>
+              <option value="cinematic">Cinematic</option>
+              <option value="illustration">Illustration</option>
+              <option value="cyberpunk">Cyberpunk</option>
             </select>
-            <select id="imageSize">
-                <option value="256x256">256x256</option>
-                <option value="512x512">512x512</option>
-                <option value="1024x1024">1024x1024</option>
+          </label>
+          <label>
+            Size
+            <select id="imageSize" class="select">
+              <option value="1024x1024">1024x1024</option>
+              <option value="1536x1024">1536x1024</option>
+              <option value="1024x1536">1024x1536</option>
             </select>
-            <button id="generateImageBtn">Generate</button>
-            <div id="imageResult"></div>
-        </div>
+          </label>
+          <div class="inline-row">
+            <button class="btn primary" type="submit">Generate Image</button>
+          </div>
+        </form>
+        <div id="imagePreview" class="image-preview"><p class="muted">Generated output appears here.</p></div>
+      </section>
 
-        <!-- AI TOOLS TAB -->
-        <div id="toolsTab" class="section">
-            <h2>🧰 AI Tools Suite</h2>
-            <div class="tool">
-                <h3>Text Summarizer</h3>
-                <textarea id="sumInput" placeholder="Paste long text here..."></textarea>
-                <button id="summarizeBtn">Summarize</button>
-                <p id="sumOutput"></p>
-            </div>
-            <div class="tool">
-                <h3>Code Generator</h3>
-                <input type="text" id="codePrompt" placeholder="Describe code you want...">
-                <button id="generateCodeBtn">Generate Code</button>
-                <pre id="codeOutput"></pre>
-            </div>
-            <div class="tool">
-                <h3>Translator</h3>
-                <textarea id="translateInput" placeholder="Enter text to translate..."></textarea>
-                <select id="languageSelect">
-                    <option value="fr">French</option>
-                    <option value="es">Spanish</option>
-                    <option value="de">German</option>
-                    <option value="zh">Chinese</option>
-                    <option value="jp">Japanese</option>
-                </select>
-                <button id="translateBtn">Translate</button>
-                <p id="translateOutput"></p>
-            </div>
-            <div class="tool">
-                <h3>Viral Tweet Generator</h3>
-                <input type="text" id="tweetInput" placeholder="Enter topic...">
-                <button id="tweetBtn">Generate Tweet</button>
-                <p id="tweetOutput"></p>
-            </div>
-            <div class="tool">
-                <h3>Meme Caption Generator</h3>
-                <input type="text" id="memeInput" placeholder="Enter meme idea...">
-                <button id="memeBtn">Generate Caption</button>
-                <p id="memeOutput"></p>
-            </div>
-            <div class="tool">
-                <h3>Viral Strategy Planner</h3>
-                <input type="text" id="viralInput" placeholder="Enter content idea...">
-                <button id="viralBtn">Plan Strategy</button>
-                <p id="viralOutput"></p>
-            </div>
+      <section id="tab-tools" class="tab-panel card">
+        <h2>AI Tools</h2>
+        <div class="tool-grid">
+          <article class="tool-card" data-tool="summarize">
+            <h4>Summarize</h4>
+            <textarea class="textarea" data-tool-input placeholder="Paste content"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="translate">
+            <h4>Translate</h4>
+            <textarea class="textarea" data-tool-input placeholder="Text to translate"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="code">
+            <h4>Code Generator</h4>
+            <textarea class="textarea" data-tool-input placeholder="Describe what to code"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="strategy">
+            <h4>Strategy Planner</h4>
+            <textarea class="textarea" data-tool-input placeholder="Topic"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="tweet">
+            <h4>Social Posts</h4>
+            <textarea class="textarea" data-tool-input placeholder="Campaign topic"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="meme">
+            <h4>Meme Captions</h4>
+            <textarea class="textarea" data-tool-input placeholder="Meme context"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="actionplan">
+            <h4>Action Plan Builder</h4>
+            <textarea class="textarea" data-tool-input placeholder="Meeting notes or goals"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
+          <article class="tool-card" data-tool="qa">
+            <h4>Q&A Flashcards</h4>
+            <textarea class="textarea" data-tool-input placeholder="Topic or study content"></textarea>
+            <button type="button" class="btn primary" data-tool-run>Run</button>
+            <div class="tool-output" data-tool-output></div>
+          </article>
         </div>
+      </section>
 
-        <!-- MEMORY TAB -->
-        <div id="memoryTab" class="section">
-            <h2>🧠 Saved AI Sessions</h2>
-            <ul id="savedChats"></ul>
+      <section id="tab-memory" class="tab-panel card">
+        <div class="page-title">
+          <h2>Saved Memory</h2>
+          <div class="inline-row">
+            <button id="clearMemoryBtn" type="button" class="btn danger">Clear</button>
+            <button id="exportMemoryBtn" type="button" class="btn ghost">Export</button>
+            <button id="importMemoryBtn" type="button" class="btn ghost">Import</button>
+            <input id="memoryImportInput" type="file" accept="application/json" class="hidden">
+          </div>
         </div>
+        <ul id="memoryList" style="list-style:none;padding:0;margin:0;"></ul>
+      </section>
 
-        <!-- ANALYTICS TAB -->
-        <div id="analyticsTab" class="section">
-            <h2>📊 Usage Analytics</h2>
-            <p>Total Messages Sent: <span id="totalMsgs">0</span></p>
-            <p>Average Response Time: <span id="avgResp">0s</span></p>
-            <p>Mood Trend: <span id="moodTrend">Neutral</span></p>
+      <section id="tab-analytics" class="tab-panel card">
+        <h2>Usage Analytics</h2>
+        <div class="kpi-grid">
+          <article class="kpi"><span>Trials Left</span><strong id="kpiTrials">0</strong></article>
+          <article class="kpi"><span>Plan</span><strong id="kpiPlan">Free</strong></article>
+          <article class="kpi"><span>Total Messages</span><strong id="kpiMessages">0</strong></article>
+          <article class="kpi"><span>Avg Latency</span><strong id="kpiAvgLatency">0s</strong></article>
+          <article class="kpi"><span>Tool Runs</span><strong id="kpiTools">0</strong></article>
+          <article class="kpi"><span>Image Runs</span><strong id="kpiImages">0</strong></article>
+          <article class="kpi"><span>Mood Trend</span><strong id="kpiMood">Neutral</strong></article>
+          <article class="kpi"><span>Engagement</span><strong>Score</strong><div class="bar-track"><div id="engagementBar" class="bar-fill" style="width:0%"></div></div></article>
         </div>
-
+      </section>
     </div>
-    <script src="js/main.js"></script>
-</body>
+  </main>
 
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
 </html>
+
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Lab - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="lab">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="card">
+        <div class="page-title">
+          <div>
+            <h1>AI Lab</h1>
+            <p>Run model comparisons and build your reusable prompt library.</p>
+          </div>
+          <span class="badge">Experimental</span>
+        </div>
+        <div class="form-grid">
+          <label>
+            Prompt
+            <textarea id="labPrompt" class="textarea" placeholder="Enter a prompt to compare across models..."></textarea>
+          </label>
+          <div class="form-grid cols-3">
+            <label>
+              Model A
+              <input id="labModelA" class="input" type="text" value="gpt-4o" list="labModelOptions">
+            </label>
+            <label>
+              Model B
+              <input id="labModelB" class="input" type="text" value="mistralai/Mistral-7B-Instruct-v0.2" list="labModelOptions">
+            </label>
+            <label>
+              Model C
+              <input id="labModelC" class="input" type="text" value="gpt-4.1-mini" list="labModelOptions">
+            </label>
+          </div>
+          <div class="inline-row">
+            <button id="labRunCompareBtn" type="button" class="btn primary">Run Compare</button>
+            <button id="labLoadModelsBtn" type="button" class="btn ghost">Load Models</button>
+          </div>
+          <datalist id="labModelOptions"></datalist>
+          <p id="labStatus" class="form-hint">Ready.</p>
+        </div>
+      </section>
+
+      <section class="grid cols-3">
+        <article class="card">
+          <h3 id="labResultALabel">Model A</h3>
+          <pre id="labResultA" class="tool-output">No result yet.</pre>
+        </article>
+        <article class="card">
+          <h3 id="labResultBLabel">Model B</h3>
+          <pre id="labResultB" class="tool-output">No result yet.</pre>
+        </article>
+        <article class="card">
+          <h3 id="labResultCLabel">Model C</h3>
+          <pre id="labResultC" class="tool-output">No result yet.</pre>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Prompt Library</h2>
+          <div class="inline-row">
+            <input id="labSaveTitle" class="input" style="max-width: 280px;" type="text" placeholder="Prompt title">
+            <button id="labSavePromptBtn" type="button" class="btn secondary">Save Prompt</button>
+          </div>
+        </div>
+        <ul id="labPromptLibrary" style="list-style:none;padding:0;margin:0;"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
+</html>
+
+

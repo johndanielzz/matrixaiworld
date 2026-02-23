@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Hub - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="dev">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="card">
+        <div class="page-title">
+          <div>
+            <h1>Developer Hub 3.0</h1>
+            <p>Code generation, review intelligence, regex analysis, and a full browser sandbox with preview, console, and terminal.</p>
+          </div>
+          <span class="badge">Power Mode</span>
+        </div>
+        <p id="devStatus" class="form-hint">Ready.</p>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <h2>AI Code Builder</h2>
+          <div class="form-grid">
+            <label>
+              Task Prompt
+              <textarea id="devPrompt" class="textarea" placeholder="Build an RBAC auth middleware with JWT refresh rotation and tests..."></textarea>
+            </label>
+            <div class="form-grid cols-2">
+              <label>
+                Language
+                <select id="devLanguage" class="select">
+                  <option value="javascript">JavaScript</option>
+                  <option value="typescript">TypeScript</option>
+                  <option value="python">Python</option>
+                  <option value="go">Go</option>
+                  <option value="rust">Rust</option>
+                  <option value="java">Java</option>
+                </select>
+              </label>
+              <label>
+                Framework / Runtime
+                <input id="devFramework" class="input" type="text" placeholder="Node.js, React, Next.js, Django...">
+              </label>
+            </div>
+            <div class="inline-row">
+              <button id="devGenerateCodeBtn" type="button" class="btn primary">Generate Code</button>
+            </div>
+            <pre id="devCodeOutput" class="tool-output">No generated code yet.</pre>
+            <div class="inline-row">
+              <input id="devSnippetTitle" class="input" style="max-width:280px;" type="text" placeholder="Snippet title">
+              <button id="devSaveSnippetBtn" type="button" class="btn secondary">Save Snippet</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Git Delivery Assistant</h2>
+          <div class="form-grid">
+            <label>
+              Diff / Change Notes
+              <textarea id="devDiffInput" class="textarea" placeholder="Paste git diff or summarize implementation changes..."></textarea>
+            </label>
+            <div class="inline-row">
+              <button id="devCommitMsgBtn" type="button" class="btn ghost">Generate Commit Message</button>
+              <button id="devPrSummaryBtn" type="button" class="btn ghost">Generate PR Summary</button>
+            </div>
+            <pre id="devCommitOutput" class="tool-output">Commit suggestions appear here.</pre>
+            <pre id="devPrOutput" class="tool-output">PR summary appears here.</pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <h2>Code Review Copilot</h2>
+          <div class="form-grid">
+            <label>
+              Input for Review
+              <textarea id="devReviewInput" class="textarea" placeholder="Paste code, architecture notes, logs, or stack traces..."></textarea>
+            </label>
+            <button id="devReviewBtn" type="button" class="btn primary">Run Deep Review</button>
+            <pre id="devReviewOutput" class="tool-output">Review findings appear here.</pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Test Plan Generator</h2>
+          <div class="form-grid">
+            <label>
+              Input for Test Strategy
+              <textarea id="devTestInput" class="textarea" placeholder="Paste specs, stories, or code to produce test strategy..."></textarea>
+            </label>
+            <button id="devTestPlanBtn" type="button" class="btn primary">Generate Test Plan</button>
+            <pre id="devTestOutput" class="tool-output">Test strategy appears here.</pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Regex Sandbox</h2>
+        <div class="form-grid">
+          <div class="form-grid cols-2">
+            <label>
+              Pattern
+              <input id="devRegexPattern" class="input" type="text" placeholder="e.g. (?&lt;user&gt;\\w+)@(?&lt;domain&gt;\\w+\\.\\w+)">
+            </label>
+            <label>
+              Flags
+              <input id="devRegexFlags" class="input" type="text" placeholder="gim">
+            </label>
+          </div>
+          <label>
+            Test Text
+            <textarea id="devRegexInput" class="textarea" placeholder="Paste text to test regex against..."></textarea>
+          </label>
+          <div class="inline-row">
+            <button id="devRegexRunBtn" type="button" class="btn ghost">Run Regex</button>
+          </div>
+          <pre id="devRegexOutput" class="tool-output">Regex matches appear here.</pre>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Dev Sandbox: HTML Preview + Console + Terminal</h2>
+          <div class="inline-row">
+            <button id="devPreviewRunBtn" type="button" class="btn primary">Run Preview</button>
+            <button id="devPreviewResetBtn" type="button" class="btn ghost">Reset</button>
+            <button id="devPreviewStarterBtn" type="button" class="btn ghost">Load Starter</button>
+          </div>
+        </div>
+        <div class="grid cols-2">
+          <div class="form-grid">
+            <label>
+              HTML
+              <textarea id="devPreviewHtml" class="textarea" placeholder="&lt;h1&gt;Hello&lt;/h1&gt;"></textarea>
+            </label>
+            <label>
+              CSS
+              <textarea id="devPreviewCss" class="textarea" placeholder="body { font-family: sans-serif; }"></textarea>
+            </label>
+            <label>
+              JavaScript
+              <textarea id="devPreviewJs" class="textarea" placeholder="console.log('Hello from JS');"></textarea>
+            </label>
+          </div>
+          <div class="form-grid">
+            <iframe id="devPreviewFrame" title="Dev Preview" sandbox="allow-scripts" style="width:100%;min-height:340px;border:1px solid var(--line);border-radius:12px;background:#fff;"></iframe>
+            <div class="page-title" style="margin:0;">
+              <h3>Browser Console</h3>
+              <button id="devConsoleClearBtn" type="button" class="btn ghost">Clear</button>
+            </div>
+            <pre id="devConsoleOutput" class="tool-output" style="min-height:140px;max-height:220px;overflow:auto;"> </pre>
+          </div>
+        </div>
+        <section class="card" style="padding:0.9rem;">
+          <div class="page-title" style="margin:0 0 0.5rem 0;">
+            <h3>Terminal</h3>
+            <button id="devTerminalClearBtn" type="button" class="btn ghost">Clear</button>
+          </div>
+          <pre id="devTerminalOutput" class="tool-output" style="min-height:120px;max-height:260px;overflow:auto;"></pre>
+          <div class="inline-row">
+            <input id="devTerminalInput" class="input" type="text" placeholder="Type command: help">
+            <button id="devTerminalRunBtn" type="button" class="btn secondary">Run</button>
+          </div>
+          <p class="form-hint">Try: <code>help</code>, <code>run-preview</code>, <code>starter-preview</code>, <code>open teacher</code>, <code>theme light</code>.</p>
+        </section>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Snippet Vault</h2>
+          <div class="inline-row">
+            <button id="devSnippetExportBtn" type="button" class="btn ghost">Export Snippets</button>
+            <button id="devSnippetImportBtn" type="button" class="btn ghost">Import Snippets</button>
+            <input id="devSnippetImportInput" type="file" accept="application/json" class="hidden">
+          </div>
+        </div>
+        <ul id="devSnippetList" style="list-style:none;padding:0;margin:0;"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
+</html>

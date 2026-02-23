@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaderboard - MatrixAI World</title>
+  <title>Roadmap - MatrixAI World</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
 </head>
-<body data-page="leaderboard">
+<body data-page="roadmap">
   <header class="site-header">
     <div class="container header-row">
       <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
@@ -15,8 +15,6 @@
       <nav id="siteNav" class="site-nav">
         <a href="index.html" data-nav="index">Home</a>
         <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
-        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
-        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
         <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
         <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
         <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
@@ -24,6 +22,7 @@
         <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
         <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
         <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
         <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
       </nav>
       <div class="header-actions">
@@ -39,36 +38,40 @@
       <section class="card">
         <div class="page-title">
           <div>
-            <h1>Leaderboard</h1>
-            <p>Track points, streaks, and plan progression.</p>
+            <h1>Product Roadmap</h1>
+            <p>Vote on upcoming features and submit ideas.</p>
           </div>
-          <span id="yourRank" class="badge">Your rank: ...</span>
-        </div>
-        <div class="inline-row">
-          <input id="leaderboardSearch" class="input" style="max-width:280px" type="text" placeholder="Search users">
-          <select id="leaderboardSort" class="select" style="max-width:220px">
-            <option value="points">Sort by Points</option>
-            <option value="streak">Sort by Streak</option>
-            <option value="name">Sort by Name</option>
-          </select>
         </div>
       </section>
 
+      <section class="grid cols-3">
+        <article class="roadmap-item" data-feature="backend-proxy">
+          <h3>Secure Backend Proxy</h3>
+          <p class="muted">Move OpenAI calls server-side for production-grade key security.</p>
+          <span class="votes">0 votes</span>
+          <button type="button" class="btn primary" data-vote>Vote</button>
+        </article>
+        <article class="roadmap-item" data-feature="team-workspaces">
+          <h3>Team Workspaces</h3>
+          <p class="muted">Shared prompts, multi-user projects, and permission controls.</p>
+          <span class="votes">0 votes</span>
+          <button type="button" class="btn primary" data-vote>Vote</button>
+        </article>
+        <article class="roadmap-item" data-feature="streaming-chat">
+          <h3>Streaming Chat</h3>
+          <p class="muted">Token-by-token responses and cancellable generations.</p>
+          <span class="votes">0 votes</span>
+          <button type="button" class="btn primary" data-vote>Vote</button>
+        </article>
+      </section>
+
       <section class="card">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>User</th>
-                <th>Plan</th>
-                <th>Points</th>
-                <th>Streak</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboardBody"></tbody>
-          </table>
-        </div>
+        <h2>Submit an Idea</h2>
+        <form id="ideaForm" class="inline-row">
+          <input id="ideaInput" class="input" type="text" placeholder="Feature idea" required>
+          <button type="submit" class="btn secondary">Submit</button>
+        </form>
+        <ul id="ideaList" style="list-style:none;padding:0;margin-top:1rem;"></ul>
       </section>
     </div>
   </main>

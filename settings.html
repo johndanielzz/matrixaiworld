@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="settings">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="card">
+        <div class="page-title">
+          <div>
+            <h1>Settings</h1>
+            <p>Configure API access, model defaults, and local data hygiene.</p>
+          </div>
+        </div>
+
+        <form id="settingsForm" class="form-grid">
+          <div class="form-grid cols-2">
+            <label>
+              Theme
+              <select id="settingsTheme" class="select">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="system">System</option>
+              </select>
+            </label>
+            <label>
+              Model
+              <input id="settingsModel" class="input" type="text" placeholder="gpt-4o" list="settingsModelOptions">
+            </label>
+          </div>
+
+          <div class="form-grid cols-2">
+            <label>
+              Video Model
+              <input id="settingsVideoModel" class="input" type="text" placeholder="gpt-4o" list="settingsModelOptions">
+            </label>
+            <label>
+              API Mode
+              <select id="settingsApiMode" class="select">
+                <option value="chat_completions">Chat Completions (AICC Recommended)</option>
+                <option value="responses">Responses API</option>
+              </select>
+            </label>
+            <label class="inline-row" style="margin-top:1.7rem;">
+              <input id="settingsStoreResponses" type="checkbox">
+              <span>Store responses when using Responses API mode</span>
+            </label>
+          </div>
+
+          <label>
+            API Key
+            <input id="settingsApiKey" class="input" type="password" placeholder="sk-...">
+          </label>
+
+          <label>
+            API Base URL
+            <input id="settingsBaseUrl" class="input" type="url" placeholder="https://api.ai.cc/v1">
+          </label>
+
+          <label>
+            System Prompt
+            <textarea id="settingsSystemPrompt" class="textarea" placeholder="Assistant behavior"></textarea>
+          </label>
+
+          <label>
+            Temperature: <span id="settingsTemperatureLabel">0.7</span>
+            <input id="settingsTemperature" type="range" min="0" max="1" step="0.1">
+          </label>
+
+          <div class="inline-row">
+            <button type="submit" class="btn primary">Save Settings</button>
+            <button type="button" id="testApiBtn" class="btn ghost">Test API</button>
+            <button type="button" id="settingsUseAiccDefaultsBtn" class="btn ghost">Use AICC Defaults</button>
+            <button type="button" id="settingsLoadModelsBtn" class="btn ghost">Load Models</button>
+            <button type="button" id="settingsRunDiagnosticsBtn" class="btn ghost">Run Diagnostics</button>
+          </div>
+          <datalist id="settingsModelOptions"></datalist>
+          <pre id="settingsModelsOutput" class="tool-output">Model list not loaded.</pre>
+          <pre id="settingsDiagnosticsOutput" class="tool-output">Diagnostics not run yet.</pre>
+          <p id="testApiResult" class="form-hint">No test run yet.</p>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>AICC Quickstart</h2>
+        <p class="form-hint">Based on your provided docs: use AICC API key + base URL <code>https://api.ai.cc/v1</code> and OpenAI-compatible <code>/chat/completions</code>.</p>
+        <pre class="tool-output">POST /chat/completions
+{
+  "model": "gpt-4o",
+  "messages": [
+    {"role":"system","content":"You are a travel agent. Be descriptive and helpful."},
+    {"role":"user","content":"Tell me about San Francisco"}
+  ],
+  "temperature": 0.7,
+  "max_tokens": 256
+}</pre>
+      </section>
+
+      <section class="card">
+        <h2>Data Actions</h2>
+        <div class="inline-row">
+          <button id="settingsClearChatBtn" type="button" class="btn danger">Clear My Chat</button>
+          <button id="settingsClearMemoryBtn" type="button" class="btn danger">Clear My Memory</button>
+          <button id="settingsExportProfileBtn" type="button" class="btn ghost">Export My Profile</button>
+          <button id="settingsExportBackupBtn" type="button" class="btn ghost">Export Full Backup</button>
+          <button id="settingsResetAllBtn" type="button" class="btn danger">Reset All Local Data</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
+</html>
+
+

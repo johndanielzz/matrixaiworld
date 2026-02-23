@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Studio - MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="video">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="card">
+        <div class="page-title">
+          <div>
+            <h1>AI Video Studio</h1>
+            <p>Generate an AI storyboard and render a downloadable WebM video in-browser.</p>
+          </div>
+          <span class="badge">Beta</span>
+        </div>
+        <p class="form-hint">This workflow uses your configured model to create scenes, then composes the final video locally.</p>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="card">
+          <h2>Prompt</h2>
+          <div class="form-grid">
+            <label>
+              Video prompt
+              <textarea id="videoPrompt" class="textarea" placeholder="Example: A futuristic city waking up at sunrise as delivery drones flow between towers."></textarea>
+            </label>
+            <div class="form-grid cols-2">
+              <label>
+                Style
+                <select id="videoStyle" class="select">
+                  <option value="cinematic">Cinematic</option>
+                  <option value="anime">Anime</option>
+                  <option value="documentary">Documentary</option>
+                  <option value="sci-fi">Sci-Fi</option>
+                </select>
+              </label>
+              <label>
+                Duration (seconds)
+                <input id="videoDuration" class="input" type="number" min="4" max="45" value="12">
+              </label>
+            </div>
+            <label>
+              Format
+              <select id="videoFormat" class="select">
+                <option value="16:9">16:9</option>
+                <option value="9:16">9:16</option>
+                <option value="1:1">1:1</option>
+              </select>
+            </label>
+            <label>
+              Motion Style
+              <select id="videoMotionStyle" class="select">
+                <option value="kenburns">Ken Burns</option>
+                <option value="static">Static</option>
+              </select>
+            </label>
+            <label>
+              Render Mode
+              <select id="videoRenderMode" class="select">
+                <option value="aicc-task">AICC API Task (Recommended)</option>
+                <option value="storyboard">Storyboard</option>
+                <option value="image-feed">Image Feed JSON</option>
+                <option value="hybrid">Hybrid (Feed + Storyboard)</option>
+              </select>
+            </label>
+            <label class="inline-row">
+              <input id="videoCaptionOverlay" type="checkbox" checked>
+              <span>Show captions in local render</span>
+            </label>
+            <label class="inline-row">
+              <input id="videoAutoPoll" type="checkbox" checked>
+              <span>Auto-poll task status every 5s</span>
+            </label>
+            <div class="form-grid cols-3">
+              <label>
+                Task Model
+                <input id="videoTaskModel" class="input" type="text" value="wan2.6-t2v" list="videoModelOptions">
+              </label>
+              <label>
+                Shot Type
+                <input id="videoTaskShotType" class="input" type="text" value="multi">
+              </label>
+              <label class="inline-row" style="margin-top:1.7rem;">
+                <input id="videoTaskPromptExtend" type="checkbox" checked>
+                <span>prompt_extend</span>
+              </label>
+            </div>
+            <label>
+              Audio URL (optional)
+              <input id="videoTaskAudioUrl" class="input" type="url" placeholder="https://...mp3">
+            </label>
+            <label>
+              Advanced Task JSON Merge (optional)
+              <textarea id="videoTaskExtraJson" class="textarea" placeholder='{"parameters":{"size":"1280*720","duration":10}}'></textarea>
+            </label>
+            <label>
+              Narration Script
+              <textarea id="videoNarrationScript" class="textarea" placeholder="AI narration script will appear here."></textarea>
+            </label>
+            <div class="form-grid cols-3">
+              <label>
+                Voice
+                <select id="videoVoiceSelect" class="select"></select>
+              </label>
+              <label>
+                Voice Rate: <span id="videoVoiceRateLabel">1.0</span>
+                <input id="videoVoiceRate" type="range" min="0.6" max="1.4" step="0.1" value="1.0">
+              </label>
+              <label>
+                Voice Pitch: <span id="videoVoicePitchLabel">1.0</span>
+                <input id="videoVoicePitch" type="range" min="0.7" max="1.4" step="0.1" value="1.0">
+              </label>
+            </div>
+            <label class="inline-row">
+              <input id="videoAutoNarration" type="checkbox" checked>
+              <span>Auto-play narration after video generation</span>
+            </label>
+            <div class="inline-row">
+              <button id="videoStoryboardBtn" type="button" class="btn ghost">Generate Storyboard</button>
+              <button id="videoGenerateBtn" type="button" class="btn primary">Generate Video</button>
+              <button id="videoCreateTaskBtn" type="button" class="btn secondary">Create API Task</button>
+              <button id="videoRefreshTaskBtn" type="button" class="btn ghost">Refresh Task</button>
+              <button id="videoGenerateNarrationBtn" type="button" class="btn ghost">Generate Narration</button>
+              <button id="videoSpeakNarrationBtn" type="button" class="btn ghost">Play Voice</button>
+              <button id="videoStopNarrationBtn" type="button" class="btn ghost">Stop Voice</button>
+              <button id="videoExportStoryboardBtn" type="button" class="btn ghost">Export Storyboard</button>
+              <button id="videoExportFeedBtn" type="button" class="btn ghost">Export Feed</button>
+              <button id="videoLoadModelsBtn" type="button" class="btn ghost">Load Models</button>
+            </div>
+            <label>
+              Current Task ID
+              <input id="videoTaskIdInput" class="input" type="text" placeholder="Task ID from API response">
+            </label>
+            <pre id="videoTaskPanel" class="tool-output">No API task yet.</pre>
+            <a id="videoTaskContentLink" class="btn ghost hidden" href="#" target="_blank" rel="noopener">Open Task Output URL</a>
+            <datalist id="videoModelOptions"></datalist>
+            <p id="videoStatus" class="form-hint">Ready.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Storyboard JSON</h2>
+          <pre id="videoStoryboard" class="tool-output" style="min-height: 340px;">Generate a storyboard to begin.</pre>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Image Feed JSON</h2>
+          <span id="videoFeedMeta" class="badge">No image feed loaded.</span>
+        </div>
+        <p class="form-hint">Paste JSON in this format: <code>{ "images": [ { "title": "...", "imageUrl": "..." } ] }</code></p>
+        <label>
+          Upload Photos
+          <input id="videoPhotoUploadInput" class="input" type="file" accept="image/*" multiple>
+        </label>
+        <textarea id="videoImageFeedInput" class="textarea" placeholder='Paste your image feed JSON here...'></textarea>
+        <div class="inline-row">
+          <button id="videoLoadFeedBtn" type="button" class="btn ghost">Load Feed</button>
+          <button id="videoUseSampleFeedBtn" type="button" class="btn ghost">Use Lion Sample</button>
+          <button id="videoClearFeedBtn" type="button" class="btn danger">Clear Feed</button>
+          <button id="videoClearUploadsBtn" type="button" class="btn danger">Clear Uploads</button>
+        </div>
+        <div id="videoImageFeedPreview" class="feed-grid">
+          <p class="muted">Paste your JSON and click "Load Feed".</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="page-title">
+          <h2>Preview</h2>
+          <a id="videoDownloadLink" class="btn secondary hidden" href="#">Download Video</a>
+        </div>
+        <progress id="videoRenderProgress" max="100" value="0" class="hidden" style="width:100%;height:10px;margin-bottom:0.8rem;"></progress>
+        <video id="videoPreview" controls style="width:100%;border-radius:14px;border:1px solid var(--line);background:#02060f;min-height:220px;"></video>
+      </section>
+
+      <section class="card">
+        <h2>Recent Video Jobs</h2>
+        <ul id="videoHistory" style="list-style:none;padding:0;margin:0;"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
+</body>
+</html>
+
+

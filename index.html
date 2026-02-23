@@ -1,231 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatrixAI — Beyond Human Imagination</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 150px 20px 80px 20px;
-            position: relative;
-        }
-
-        .hero h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #f0f0f0;
-            margin-bottom: 40px;
-        }
-
-        .btn {
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            color: #000;
-            background: linear-gradient(90deg, #00ff00, #ff00ff);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 20px #00ff00, 0 0 40px #ff00ff;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px #00ff00, 0 0 60px #ff00ff;
-        }
-
-        /* Features Section */
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 50px 20px;
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 15px;
-            width: 280px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: scale(1.05);
-        }
-
-        .feature-card h3 {
-            color: #00ff00;
-            margin-bottom: 15px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .feature-card p {
-            color: #f0f0f0;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            background: #111;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .testimonials h2 {
-            color: #ff00ff;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 50px;
-        }
-
-        .testimonial-card {
-            background: #1e1e1e;
-            padding: 30px;
-            margin: 20px auto;
-            border-radius: 15px;
-            max-width: 600px;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            color: #f0f0f0;
-        }
-
-        .testimonial-card span {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #00ff00;
-        }
-
-        /* Footer */
-        footer {
-            background: #1a1a1a;
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 2px solid #00ff00;
-        }
-
-        footer a {
-            color: #00ff00;
-            margin: 0 10px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        footer a:hover {
-            color: #ff00ff;
-        }
-
-        /* Animated Background */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, #00ff0020, transparent 50%),
-                radial-gradient(circle at 70% 70%, #ff00ff20, transparent 50%);
-            background-size: cover;
-            z-index: -1;
-            animation: bgMove 30s linear infinite;
-        }
-
-        @keyframes bgMove {
-            0% {
-                background-position: 0 0, 100% 100%;
-            }
-
-            50% {
-                background-position: 50% 50%, 50% 50%;
-            }
-
-            100% {
-                background-position: 0 0, 100% 100%;
-            }
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 768px) {
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatrixAI World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
+<body data-page="index">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">MatrixAI<small>World Platform</small></a>
+      <button id="navToggle" class="nav-toggle" type="button">Menu</button>
+      <nav id="siteNav" class="site-nav">
+        <a href="index.html" data-nav="index">Home</a>
+        <a href="dashboard.html" class="auth-only" data-nav="dashboard">Dashboard</a>
+        <a href="payment.html" class="auth-only" data-nav="payment">Payments</a>
+        <a href="leaderboard.html" class="auth-only" data-nav="leaderboard">Leaderboard</a>
+        <a href="roadmap.html" class="auth-only" data-nav="roadmap">Roadmap</a>
+        <a href="video-studio.html" class="auth-only" data-nav="video">Video Studio</a>
+        <a href="ai-lab.html" class="auth-only" data-nav="lab">AI Lab</a>
+        <a href="dev-hub.html" class="auth-only" data-nav="dev">Dev Hub</a>
+        <a href="teacher.html" class="auth-only" data-nav="teacher">Teacher</a>
+        <a href="cybersecurity.html" class="auth-only" data-nav="cyber">Cybersecurity</a>
+        <a href="automation-lab.html" class="auth-only" data-nav="automation">Automation</a>
+        <a href="admin.html" class="auth-only" data-nav="admin">Admin</a>
+        <a href="settings.html" class="auth-only" data-nav="settings">Settings</a>
+        <a href="terms-and-conditions.html" data-nav="terms">Terms</a>
+        <a href="login.html" class="guest-only" data-nav="login">Login</a>
+        <a href="register.html" class="guest-only" data-nav="register">Register</a>
+      </nav>
+      <div class="header-actions">
+        <span id="headerAccount" class="account-chip">Guest session</span>
+        <button type="button" class="btn ghost js-theme-cycle">Theme</button>
+        <button type="button" class="btn ghost js-logout auth-only">Logout</button>
+      </div>
+    </div>
+  </header>
 
-<body>
-    <header>
-        <h1>MatrixAI</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="register.html">Register</a>
-        </nav>
-    </header>
+  <main class="page-shell">
+    <div class="container layout-stack">
+      <section class="hero-shell">
+        <span class="hero-kicker">2026 Release</span>
+        <h1>Rewrite complete. Faster, cleaner MatrixAI workspace.</h1>
+        <p>
+          One unified frontend across auth, dashboard, payments, admin, and roadmap. Configure your own API key,
+          run AI tools, generate images, and manage account analytics in a single flow.
+        </p>
+        <div class="button-row">
+          <a class="btn primary" href="register.html">Start Free Account</a>
+          <a class="btn secondary" href="dashboard.html">Open Dashboard</a>
+        </div>
+        <div class="meta-list">
+          <div class="meta-item"><strong id="statUsers">0</strong>Users</div>
+          <div class="meta-item"><strong id="statMessages">0</strong>AI Messages</div>
+          <div class="meta-item"><strong id="statPlans">0</strong>Subscriptions</div>
+        </div>
+      </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h2>Welcome to MatrixAI</h2>
-            <p>The AI that can do anything you imagine. Try it now and explore limitless possibilities!</p>
-            <a href="register.html" class="btn">Start Free Trial</a>
-        </section>
+      <section class="grid cols-3">
+        <article class="card">
+          <h3>Secure-by-default Flow</h3>
+          <p>No embedded API key. Configure secrets in your own browser session or move calls to backend later.</p>
+        </article>
+        <article class="card">
+          <h3>Unified Feature Set</h3>
+          <p>Chat, image generation, AI tools, memory export/import, analytics, billing, and admin controls in one code path.</p>
+        </article>
+        <article class="card">
+          <h3>Scalable Layout</h3>
+          <p>Shared design system and shared script controllers make future page additions faster and safer.</p>
+        </article>
+      </section>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="feature-card">
-                <h3>Instant Answers</h3>
-                <p>Get accurate and lightning-fast responses to any question using OpenAI API.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Futuristic UI</h3>
-                <p>Experience a sleek, neon-themed interface designed for advanced AI interaction.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Secure Payments</h3>
-                <p>Upgrade seamlessly via PayPal, Stripe, or Cryptocurrency for unlimited access.</p>
-            </div>
-        </section>
+      <section class="card">
+        <div class="page-title">
+          <h2>What Was Added</h2>
+          <p>New pages and upgraded workflows.</p>
+        </div>
+        <div class="grid cols-2">
+          <div>
+            <ul class="check-list">
+              <li>New <code>settings.html</code> with API + theme configuration.</li>
+              <li>New <code>roadmap.html</code> with voting and idea submission.</li>
+              <li>New <code>video-studio.html</code> for AI-generated video output.</li>
+              <li>New <code>ai-lab.html</code> for model comparison and prompt libraries.</li>
+              <li>New <code>dev-hub.html</code> for code generation and snippet management.</li>
+              <li>New <code>teacher.html</code> with voice-enabled teaching for any course/topic.</li>
+              <li>New <code>cybersecurity.html</code> for audits and incident response workflows.</li>
+              <li>New <code>automation-lab.html</code> for workflow design and queue simulation.</li>
+              <li>Refactored dashboard with tabs, memory sync, and stats.</li>
+              <li>Payment simulation with promo codes, billing cadence, and history.</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="check-list">
+              <li>Admin backup import/export for all <code>matrix_*</code> storage keys.</li>
+              <li>User leaderboard with search and sort modes.</li>
+              <li>Announcement banner support across pages.</li>
+              <li>Responsive navigation and unified theme system.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
-        <!-- Testimonials Section -->
-        <section class="testimonials">
-            <h2>What Our Users Say</h2>
-            <div class="testimonial-card">
-                <p>"MatrixAI completely changed the way I interact with AI. It's beyond imagination!"</p>
-                <span>- Alex R.</span>
-            </div>
-            <div class="testimonial-card">
-                <p>"The interface is futuristic, smooth, and the responses are incredible. Highly recommended!"</p>
-                <span>- Sarah K.</span>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>Follow us:</p>
-        <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">GitHub</a>
-        <p>&copy; 2025 MatrixAI. All rights reserved.</p>
-    </footer>
+  <footer>
+    <div class="container">
+      <span>MatrixAI World</span>
+      <span>Copyright <span class="js-year"></span></span>
+    </div>
+  </footer>
 </body>
-
 </html>
+
+
